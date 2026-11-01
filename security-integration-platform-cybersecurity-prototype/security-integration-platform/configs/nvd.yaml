@@ -1,0 +1,32 @@
+# NIST NVD CVE API 2.0 - API key in header (optional), offset pagination (startIndex / resultsPerPage)
+name: nvd
+vendor: NIST
+category: vulnerabilities
+base_url: https://services.nvd.nist.gov
+auth:
+  type: api_key
+  header: apiKey
+  secret: CONNECTOR_NVD_API_KEY    # optional; a free key raises the rate limit
+  optional: true
+endpoint:
+  path: /rest/json/cves/2.0
+  method: GET
+pagination:
+  type: offset
+  items_path: vulnerabilities
+  start_param: startIndex
+  limit_param: resultsPerPage
+  page_size: 50
+  max_pages: 3
+min_interval_seconds: 6            # NVD allows 5 requests / 30 s without a key
+timeout_seconds: 60
+schedule: 60m
+mapping:
+  entity: vulnerability
+  fields:
+    id: cve.id
+    type: cve.vulnStatus
+    severity: cve.metrics.cvssMetricV31.0.cvssData.baseSeverity
+    timestamp: { path: cve.published, convert: date }
+    description: cve.descriptions.0.value
+  required: [id]

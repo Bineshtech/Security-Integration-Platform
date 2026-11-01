@@ -1,0 +1,35 @@
+# FIRST.org Exploit Prediction Scoring System - public API, no credentials required
+name: epss
+vendor: FIRST.org
+product: Exploit Prediction Scoring System
+category: vulnerability_risk
+base_url: https://api.first.org
+auth:
+  type: none
+endpoint:
+  path: /data/v1/epss
+  method: GET
+  params:
+    epss-gt: "0.90"
+    limit: 1000
+pagination:
+  type: offset
+  items_path: data
+  start_param: offset
+  limit_param: limit
+  page_size: 1000
+  max_pages: 5
+timeout_seconds: 60
+schedule: 24h
+mapping:
+  entity: vulnerability
+  fields:
+    id: cve
+    type:
+      value: epss_score
+    timestamp: date
+    description:
+      value: "FIRST EPSS exploitation probability score (0-1); percentile is stored separately."
+    epss: epss
+    percentile: percentile
+  required: [id]

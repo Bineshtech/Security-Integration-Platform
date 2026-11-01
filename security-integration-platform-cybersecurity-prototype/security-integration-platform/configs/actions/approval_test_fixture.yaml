@@ -1,0 +1,15 @@
+actions:
+  - name: isolate_host
+    description: Isolate a host from the network (dry-run only)
+    method: POST
+    path: /hosts/{host_id}/isolate
+    risk_level: high
+    requires_approval: true
+    enabled: true
+  - name: add_note
+    description: Add an analyst note
+    method: POST
+    path: /notes/{ticket_id}
+    risk_level: low
+    requires_approval: false
+    enabled: true

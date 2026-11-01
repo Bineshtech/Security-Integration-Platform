@@ -1,0 +1,35 @@
+name: urlscan_threat_intel
+vendor: urlscan.io
+product: Website Scan Intelligence
+category: threat_intelligence
+
+base_url: https://urlscan.io
+
+auth:
+  type: none
+
+endpoint:
+  path: /api/v1/search/
+  method: GET
+  params:
+    q: "page.domain:example.com"
+    size: 10
+
+pagination:
+  type: none
+  items_path: results
+
+schedule: 24h
+timeout_seconds: 30
+min_interval_seconds: 60
+
+mapping:
+  entity: indicator
+  fields:
+    external_id: _id
+    title: page.title
+    description: page.url
+    timestamp: task.time
+    source: task.source
+  required:
+    - external_id

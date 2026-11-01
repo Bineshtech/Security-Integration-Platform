@@ -1,0 +1,35 @@
+name: github_security_advisories
+vendor: GitHub
+product: Global Security Advisories
+category: vulnerability_intelligence
+
+base_url: https://api.github.com
+
+auth:
+  type: none
+
+endpoint:
+  path: /advisories
+  method: GET
+  params:
+    per_page: 20
+
+pagination:
+  type: none
+  items_path: ""
+
+schedule: 24h
+timeout_seconds: 30
+min_interval_seconds: 60
+
+mapping:
+  entity: security_advisory
+  fields:
+    external_id: ghsa_id
+    title: summary
+    description: description
+    severity: severity
+    timestamp: published_at
+    source: html_url
+  required:
+    - external_id

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security Integration Platform</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section id="login" class="login hidden">
+  <form id="login-form" class="card" autocomplete="on">
+    <h1>Security Integration Platform</h1>
+    <label>Username <input id="u" name="username" autocomplete="username" required maxlength="64"></label>
+    <label>Password <input id="p" name="password" type="password" autocomplete="current-password" required maxlength="256"></label>
+    <button type="submit">Sign in</button>
+    <p id="login-err" class="err" role="alert"></p>
+  </form>
+</section>
+
+<div id="app" class="app hidden">
+  <header>
+    <strong>Security Integration Platform</strong>
+    <nav id="tabs"></nav>
+    <span class="spacer"></span>
+    <span id="who" class="muted"></span>
+    <button id="logout" class="ghost">Sign out</button>
+  </header>
+  <main id="view"></main>
+  <div id="toast" class="toast" role="status"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

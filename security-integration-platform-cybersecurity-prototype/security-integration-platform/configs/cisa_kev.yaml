@@ -1,0 +1,26 @@
+# CISA Known Exploited Vulnerabilities - no authentication, single JSON document
+name: cisa_kev
+vendor: CISA
+category: vulnerabilities
+base_url: https://www.cisa.gov
+auth:
+  type: none
+endpoint:
+  path: /sites/default/files/feeds/known_exploited_vulnerabilities.json
+  method: GET
+pagination:
+  type: none
+  items_path: vulnerabilities
+timeout_seconds: 60
+schedule: 6h
+mapping:
+  entity: vulnerability
+  fields:
+    id: cveID
+    type: { value: known_exploited }
+    timestamp: { path: dateAdded, convert: date }
+    description: shortDescription
+    vendor: vendorProject
+    product: product
+    ransomware_use: knownRansomwareCampaignUse
+  required: [id]

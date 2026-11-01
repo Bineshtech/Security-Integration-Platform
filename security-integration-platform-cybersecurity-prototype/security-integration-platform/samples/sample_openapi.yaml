@@ -1,0 +1,61 @@
+
+openapi: 3.0.3
+
+info:
+  title: Sample Security Monitoring API
+  version: 1.0.0
+  description: Sample API for testing automatic connector discovery.
+
+servers:
+  - url: https://security.example.com/api/v1
+
+security:
+  - BearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+paths:
+  /alerts:
+    get:
+      operationId: listAlerts
+      summary: Retrieve security alerts
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of security alerts
+
+  /alerts/{alert_id}:
+    get:
+      operationId: getAlert
+      summary: Retrieve an individual alert
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Alert details
+
+  /alerts/{alert_id}/resolve:
+    post:
+      operationId: resolveAlert
+      summary: Resolve a security alert
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Alert resolution result
